@@ -1,21 +1,20 @@
 def solution(n, lost, reserve):
-    answer = 0
-    all_n_list = [i + 1 for i in range(n)]
-    
-    if n == len(lost + reserve):
-        answer += len(reserve)
-    else:
-        answer += len(set(all_n_list) - set(lost + reserve)) + len(reserve)
+    new_lost = set(lost) - set(reserve)
+    new_reserve = set(reserve) - set(lost)
 
-    for i in reserve:
-        if i + 1 in lost:
-            answer += 1
-
-    return answer
+    for i in new_lost:
+        if i + 1 in new_reserve:
+            new_reserve.remove(i + 1)
+        elif i - 1 in new_reserve:
+            new_reserve.remove(i - 1)
+        else:
+            n -= 1
+        
+    return n
 
 if __name__ == '__main__':
-    n = 4
-    lost = [3]
-    reserve = [2]
+    n = 5
+    lost = [2, 4]
+    reserve = [1, 3, 5]
     a = solution(n, lost, reserve)
     print(a)
