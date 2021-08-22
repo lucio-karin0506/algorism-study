@@ -26,8 +26,58 @@ def func1(n, d_list):
 
     return x, y
 
+# problem2
+# 완전 탐색
+def func2(n):
+    count = 0
+    for i in range(n + 1):
+        for j in range(60):
+            for k in range(60):
+                if '3' in str(i) + str(j) + str(k):
+                    count += 1
+
+    return count
+
+# problem3
+def func3(place_num):
+    knight_place_num = 0
+    row = int(place_num[1])
+    col = int(ord(place_num[0])) - int(ord('a')) + 1
+
+    steps = [(-2, -1), (-2, 1), (2, -1), (2, 1), 
+            (-1, -2), (-1, 2), (1, -2), (1, 2)]
+
+    for step in steps:
+        next_row = row + step[0]
+        next_col = col + step[1]
+
+        if next_row >= 1 and next_row <= 8 and next_col >=1 and next_col <= 8:
+            knight_place_num += 1
+
+    return knight_place_num
+
+# problem4
+def func4(input_text):
+    input_list = list(input_text)
+
+    alpha_list = []
+    num_list = []
+    
+    for i in input_list:
+        if i.isalpha() == True:
+            alpha_list.append(i)
+        elif i.isdigit() == True:
+            num_list.append(int(i))
+
+    result = ''.join(sorted(alpha_list)) + str(sum(num_list))
+
+    return result
+
 if __name__ == '__main__':
-    n = int(input('input n: '))
-    d_list = input('input d_list: ').split()
-    a = func1(n, d_list)
+    # n = int(input('input n: '))
+    # d_list = input('input d_list: ').split()
+    # a = func1(n, d_list)
+
+    n = input('input: ')
+    a = func4(n)
     print(a)
