@@ -1,17 +1,20 @@
 def solution(genres, plays):
-    play_dict = {}
-    play_list = []
 
-    answer = []
+    if len(genres) == len(plays):
+        all_plays = []
+        set_genres = set(genres)
 
-    if len(genres) != len(plays):
-        return 'error!'
+        answer = []
+
+        for i in zip(genres, plays):
+            all_plays.append(i)
+
+        print(all_plays)
+        print(set_genres)
+        
+        return answer
     else:
-        for item in zip(genres, plays):
-            # 여기서 같은 장르 플레이수 합산 어캐 함..;;
-            play_list.append(item)
-    print(play_list)
-    return answer
+        return 'two data length is different!'
 
 if __name__ == '__main__':
     genres = ["classic", "pop", "classic", "classic", "pop"]
