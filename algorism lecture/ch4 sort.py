@@ -90,9 +90,30 @@ def quick_sort2(arr):
     # 분할 이후 왼쪽 부분과 오른쪽 부분에서 각각 정렬 수행하고, 전체 리스트 반환
     return quick_sort2(left_side) + [pivot] + quick_sort2(right_side)
 
+'''
+    계수 정렬
+    1. 특정 조건 부합할 때만 사용할 수 있지만 매우 빠름
+    2. 가장 큰 데이터와 가장 작은 데이터의 차이가 매우 크면 사용하기 힘듦
+    3. 가장 큰 데이터와 가장 작은 데이터의 범위가 모두 담길 수 있도록 하나의 리스트 생성
+    4. 데이터를 하나씩 확인하며 데이터의 값과 동일한 인덱스의 데이터를 1씩 증가
+'''
+def counting_sort(arr):
+    # 모든 범위를 포함하는 리스트 선언(모든 값은 0으로 초기화)
+    count = [0] * (max(arr) + 1)
+
+    # 각 데이터에 해당하는 인덱스의 값 증가
+    for i in range(len(arr)):
+        count[arr[i]] += i
+
+    # 리스트에 기록된 정렬 정보 확인
+    for i in range(len(count)):
+        for _ in range(count[i]):
+            print(i, end=' ')
+    
+
 if __name__ == '__main__':
     test_arr = [7, 5, 9, 0, 3, 1, 6, 2, 4, 8]
     # sorted_arr = quick_sort(test_arr, 0, len(test_arr) - 1)
     # print(test_arr)
 
-    print(quick_sort2(test_arr))
+    print(counting_sort(test_arr))
