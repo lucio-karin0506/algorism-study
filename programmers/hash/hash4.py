@@ -2,19 +2,21 @@ def solution(genres, plays):
 
     if len(genres) == len(plays):
         all_plays = []
-        set_genres = set(genres)
-
+        genre_play_dict = {}
         answer = []
 
-        for i in zip(genres, plays):
-            all_plays.append(i)
+        for play in zip(genres, plays):
+            all_plays.append(play)
 
-        print(all_plays)
-        print(set_genres)
+        for play_index in range(len(all_plays)):
+            pass
+            
+        # print(all_plays)
+        # [('classic', 500), ('pop', 600), ('classic', 150), ('classic', 800), ('pop', 2500)]
         
         return answer
     else:
-        return 'two data length is different!'
+        return "two datas' length is different!"
 
 if __name__ == '__main__':
     genres = ["classic", "pop", "classic", "classic", "pop"]
