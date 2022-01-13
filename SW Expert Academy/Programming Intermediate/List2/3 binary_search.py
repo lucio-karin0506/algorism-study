@@ -1,4 +1,4 @@
-def binary_search(num_list, start, end, target):
+def binary_search(start, end, target):
     # 쪽 탐색 횟수
     count = 1
 
@@ -9,11 +9,11 @@ def binary_search(num_list, start, end, target):
         mid = (start + end) // 2
 
         # 찾고자 하는 값이 갱신된 중앙값이랑 일치할 때
-        if target == num_list[mid]:
-            return count
+        if target == mid:
+            break
 
         # 중앙값보다 작을 때
-        elif target < num_list[mid]:
+        elif target < mid:
             end = mid - 1
             count += 1
 
@@ -22,7 +22,7 @@ def binary_search(num_list, start, end, target):
             start = mid + 1
             count += 1
 
-    return None
+    return count
 
 
 T = int(input())
@@ -33,13 +33,13 @@ for test_case in range(1, T + 1):
     # 전체 페이지 리스트
     num_list = [i for i in range(1, page+1)]
 
-    # 시작, 끝 값 인덱스 선언
-    start = 0
-    end = len(num_list) - 1
+    # 시작, 끝 페이지
+    start = num_list[0]
+    end = num_list[-1]
 
     # 승부 판별
-    a_count = binary_search(num_list, start, end, a_key)
-    b_count = binary_search(num_list, start, end, b_key)
+    a_count = binary_search(start, end, a_key)
+    b_count = binary_search(start, end, b_key)
 
     if a_count < b_count:
         res.append('A')
