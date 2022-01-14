@@ -6,17 +6,14 @@ for test_case in range(1, T + 1):
     num_list = list(map(int, input().split()))
     temp = []
 
-    for num in num_list:
+    for _ in range(input_num):
 
-        temp.append(str(max(num_list)))
-        temp.append(str(min(num_list)))
-
-        num_list.remove(max(num_list))
-        num_list.remove(min(num_list))
-
-        if len(num_list) == 2:
+        if len(num_list) != 0:
             temp.append(str(max(num_list)))
             temp.append(str(min(num_list)))
+
+            num_list.remove(max(num_list))
+            num_list.remove(min(num_list))
 
     res.append(temp)
 
