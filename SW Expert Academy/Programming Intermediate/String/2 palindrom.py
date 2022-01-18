@@ -12,6 +12,8 @@ def get_palin(word_canvas, word_len):
                 # 각 단어의 처음과 끝 글자, 두 번째와 두 번째 끝 글자 이런식으로 같은지 비교하고~
                 if word_canvas[i][j+k] == word_canvas[i][j + word_len-1-k]:
                     count += 1
+            # 각 단어를 처음~중간, 끝~중간으로 나누어 한글자씩 탐색하고
+            # 탐색하고자 하는 회문길이의 절반값에 count가 일치하면
             if count == word_len//2:
                 for l in range(j, j + word_len):
                     palin_letter = word_canvas[i][l]
