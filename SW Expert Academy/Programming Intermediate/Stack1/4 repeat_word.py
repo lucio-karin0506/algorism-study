@@ -28,6 +28,12 @@ def check_repeat(word_list):
             else:
                 return word_len
             
+def check_repeat2(word_list):
+    stack = []
+
+    while True:
+        for letter in word_list:
+            word_list.pop()
 
 
 if __name__ == '__main__':
