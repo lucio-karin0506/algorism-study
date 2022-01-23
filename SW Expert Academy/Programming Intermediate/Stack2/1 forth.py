@@ -29,7 +29,7 @@ def forth(input_list):
             elif letter == '*':
                 ans_list.append(n1 * n2)
             elif letter == '/':
-                ans_list.append(n1 / n2)
+                ans_list.append(n1 // n2)
 
 
 if __name__ == '__main__':
