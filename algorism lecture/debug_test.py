@@ -1,40 +1,39 @@
-# 2. 미로 탈출
-n, m = map(int, input().split())
-graph = [list(map(int, input())) for _ in range(n)]
+# 1. 특정 거리의 도시 찾기
+N, M, K, X = map(int, input().split())
+# index가 0부터 시작하므로 시작 노드 숫자 1을 적용하기 위하여 N+1 수행
+graph = [[] for _ in range(N+1)]
 
+# 인접 리스트 생성
+for i in range(M):
+    start, end = map(int, input().split())
+    graph[start].append(end)
+
+# 모든 도시에 대한 최단 거리 초기화
+distance = [-1] * (N+1)
+# 출발 도시까지의 거리는 0으로 설정
+distance[X] = 0
+
+# bfs 수행
 from collections import deque
 
-# 이동할 네 방향 정의
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
+queue = deque([X])
+while queue:
+    now = queue.popleft()
+    # 현재 도시에서 이동할 수 있는 모든 도시 확인
+    for next_node in graph[now]:
+        # 아직 방문하지 않은 도시라면
+        if distance[next_node] == -1:
+            # 최단 거리 갱신
+            distance[next_node] = distance[now] + 1
+            queue.append(next_node)
 
-# bfs
-def maze(graph, x, y):
-    queue = deque()
-    queue.append((x, y))
+# 최단 거리가 K인 모든 도시의 번호를 오름차순으로 출력
+check = False
+for idx, value in enumerate(distance):
+    if value == K:
+        print(idx)
+        check = True
 
-    # 큐가 빌 때까지 반복
-    while queue:
-        x, y = queue.popleft()
-
-        # 현재 위치에서 네 방향으로의 위치 확인
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-
-            # 미로 찾기 공간을 벗어난 경우 무시
-            if nx < 0 or ny < 0 or nx >= n or ny >= m:
-                continue
-            # 벽인 경우 무시
-            if graph[nx][ny] == 0:
-                continue
-            # 해당 노드를 처음 방문하는 경우에만 최단 거리 기록
-            if graph[nx][ny] == 1:
-                graph[nx][ny] = graph[x][y] + 1
-                queue.append((nx, ny))
-
-    # 가장 오른쪽 아래까지의 최단거리 반환
-    return graph[n-1][m-1]
-
-res = maze(graph, 0, 0)
-print(res)
+# 만약 최단 거리가 K인 도시 없다면 -1 출력
+if check == False:
+    print(-1)
