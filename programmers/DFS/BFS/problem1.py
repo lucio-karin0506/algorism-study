@@ -1,15 +1,14 @@
 def solution(numbers, target):
     answer = 0
     visited = []
-
     visited.append(0)
 
     for num in numbers:
-        tmp = []
+        temp = []
         for i in visited:
-            tmp.append(i + num)
-            tmp.append(i - num)
-        visited = tmp
+            temp.append(i + num)
+            temp.append(i - num)
+        visited = temp
 
     for i in visited:
         if i == target:
